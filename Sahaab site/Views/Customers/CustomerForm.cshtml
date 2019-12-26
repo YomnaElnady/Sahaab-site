@@ -1,0 +1,43 @@
+﻿@model Sahaab_site.ViewModels.CustomerFormViewModel
+@{
+    ViewBag.Title = "ADD CUSTOMER";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Customer</h2>
+
+@using (Html.BeginForm("AddCustomer", "Customers"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors.")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.Name)
+        @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.Email)
+        @Html.TextBoxFor(m => m.Customer.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.Email)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.Gender)
+        @Html.TextBoxFor(m => m.Customer.Gender, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.Gender)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.BirthDate)
+        @Html.TextBoxFor(m => m.Customer.BirthDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.BirthDate)
+    </div>
+
+    @Html.HiddenFor(m => m.Customer.Id)
+    @Html.AntiForgeryToken()
+    <div class="btn btn-outline-info">@Html.ActionLink("Submit", "AddCustomer", "Customers")</div>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,10 +1,47 @@
-﻿@model Sahaab_site.Models.Customer
+﻿@model IEnumerable<Sahaab_site.Models.Customer>
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Name</h2>
+<h2>Customers Table</h2>
 
-
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customers</title>
+</head>
+<body>
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-Light">
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var customer in Model)
+                    {
+                        <tr class="table-info">
+                            <td>@customer.Id</td>
+                            <td>@customer.Name</td>
+                            <td>@customer.Email</td>
+                            <td>@customer.Gender</td>
+                            <td>
+                                <div class="btn btn-outline-secondary">@Html.ActionLink("Edit","Edit","Customers", new { Id = 1 })</div>
+                                <div class="btn btn-outline-secondary">@Html.ActionLink("Delete","Delete","Customers", new { Id = @customer.Id })</div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="btn btn-outline-info">@Html.ActionLink("ADD CUSTOMER","Create","Customers")</div>
+        </div>
+    </div>
+</body>
+</html>
