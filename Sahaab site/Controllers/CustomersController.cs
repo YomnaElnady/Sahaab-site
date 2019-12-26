@@ -22,18 +22,14 @@ namespace Sahaab_site.Controllers
             _context.Dispose();
         }
 
-        public ActionResult Initial()
-        {
-
-            return  Content("Welcome to Sahaab Site!");
-        }
-       
+        
         public ActionResult Create()
         {
 
             var viewModel = new CustomerFormViewModel
             {
                 Customer = new Customer(),
+                PhoneNumbers = new List<Number>()
             };
 
             return View("CustomerForm", viewModel);

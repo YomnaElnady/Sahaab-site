@@ -9,5 +9,10 @@ namespace Sahaab_site.Models
     {
         public int Id { get; set; }
         public string PhoneNumber { get; set; }
+
+        public static implicit operator List<object>(Number v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

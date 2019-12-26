@@ -26,5 +26,11 @@ namespace Sahaab_site.Controllers
 
             return View();
         }
+        public ActionResult Initial()
+        {
+
+            return View("Index");
+        }
+
     }
 }
