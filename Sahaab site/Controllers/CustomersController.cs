@@ -24,8 +24,8 @@ namespace Sahaab_site.Controllers
 
         public ActionResult Initial()
         {
-           
-            return new EmptyResult();
+
+            return  Content("Welcome to Sahaab Site!");
         }
        
         public ActionResult Create()
@@ -39,18 +39,15 @@ namespace Sahaab_site.Controllers
             return View("CustomerForm", viewModel);
         }
 
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddCustomer (Customer customer)
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new CustomerFormViewModel
-                {
-                    Customer = customer,
-                };
 
-                return View("CustomerForm", viewModel);
+                return View("CustomerForm");
             }
 
            
@@ -68,16 +65,48 @@ namespace Sahaab_site.Controllers
 
        
 
-        public ActionResult Edit(int Id)
-
+       
+        public ActionResult Delete(int Id)
         {
-           
-            var Customer = _context.Customers.Find(Id);
+            var Customer = _context.Customers.SingleOrDefault(c=>c.Id==Id);
             if (Customer == null)
                 return HttpNotFound();
 
-            return View("EditCustomer");
+            _context.Customers.Attach(Customer);
+            _context.Customers.Remove(Customer);
+            _context.SaveChanges();
+            return RedirectToAction("Display", "Customers");
         }
 
+        public ActionResult Edit(int Id)
+        {
+
+            var Customer = _context.Customers.Single(c => c.Id == Id);
+            if (Customer == null)
+                return HttpNotFound();
+
+            return View("EditCustomer",Customer);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SubmitEdit(Customer customer)
+        {
+            if (!ModelState.IsValid)
+            {
+
+                return View("EditCustomer");
+            }
+            if (customer.Id == 0)
+                return new EmptyResult();
+
+            var Customer = _context.Customers.Single(c => c.Id == customer.Id);
+            if (Customer == null)
+                return HttpNotFound();
+
+            TryUpdateModel(Customer);
+            _context.SaveChanges();
+            return RedirectToAction("Display", "Customers");
+        }
     }
 }

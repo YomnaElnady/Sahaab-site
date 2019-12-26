@@ -1,4 +1,4 @@
-﻿@model Sahaab_site.ViewModels.CustomerFormViewModel
+﻿@model Sahaab_site.Models.Customer
 @{
     ViewBag.Title = "ADD CUSTOMER";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,35 +6,36 @@
 
 <h2>Edit Customer</h2>
 
-@using (Html.BeginForm("SubmitEdit", "Customers"))
+@using (Html.BeginForm("SubmitEdit", "Customers", FormMethod.Post))
 {
     @Html.ValidationSummary(true, "Please fix the following errors.")
     <div class="form-group">
-        @Html.LabelFor(m => m.Customer.Name)
-        @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Customer.Name)
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Customer.Email)
-        @Html.TextBoxFor(m => m.Customer.Email, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Customer.Email)
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Email)
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Customer.Gender)
-        @Html.TextBoxFor(m => m.Customer.Gender, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Customer.Gender)
+        @Html.LabelFor(m => m.Gender)
+        @Html.TextBoxFor(m => m.Gender, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Gender)
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Customer.BirthDate)
-        @Html.TextBoxFor(m => m.Customer.BirthDate, "{0:d MMM yyyy}", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Customer.BirthDate)
+        @Html.LabelFor(m => m.BirthDate)
+        @Html.TextBoxFor(m => m.BirthDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.BirthDate)
     </div>
 
-    @Html.HiddenFor(m => m.Customer.Id)
+    @Html.HiddenFor(m => m.Id)
     @Html.AntiForgeryToken()
-    <div class="btn btn-outline-info">@Html.ActionLink("Submit", "SubmitEdit", "Customers")</div>
+    <button type="submit" value="Submit" class="btn btn-outline-info">Submit</button>
+    //<div class="btn btn-outline-info">@Html.ActionLink("Submit", "SubmitEdit", "Customers")</div>
 }
 
 @section scripts

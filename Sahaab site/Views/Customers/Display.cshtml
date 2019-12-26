@@ -25,22 +25,24 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @{int i = 0;}
                     @foreach (var customer in Model)
                     {
+                        {i++;}
                         <tr class="table-info">
-                            <td>@customer.Id</td>
+                            <td>@i</td>
                             <td>@customer.Name</td>
                             <td>@customer.Email</td>
                             <td>@customer.Gender</td>
                             <td>
-                                <div class="btn btn-outline-secondary">@Html.ActionLink("Edit","Edit","Customers", new { Id = 1 })</div>
-                                <div class="btn btn-outline-secondary">@Html.ActionLink("Delete","Delete","Customers", new { Id = @customer.Id })</div>
+                                <div class="btn btn-outline-secondary">@Html.ActionLink("Edit", "Edit", "Customers", new { Id = @customer.Id }, null)</div>
+                                <div class="btn btn-outline-secondary">@Html.ActionLink("Delete", "Delete", "Customers", new { Id = @customer.Id }, new { onclick = "return confirm('Are you sure you wish to delete this customer?');" })</div>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
-            <div class="btn btn-outline-info">@Html.ActionLink("ADD CUSTOMER","Create","Customers")</div>
+            <div class="btn btn-outline-info">@Html.ActionLink("ADD CUSTOMER", "Create", "Customers")</div>
         </div>
     </div>
 </body>
