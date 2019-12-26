@@ -53,7 +53,7 @@ namespace Sahaab_site.Controllers
            
             _context.Customers.Add(customer);
             _context.SaveChanges();
-
+            TempData["message"] = "Successfully Added";
             return RedirectToAction("Display", "Customers");
         }
 
@@ -75,6 +75,7 @@ namespace Sahaab_site.Controllers
             _context.Customers.Attach(Customer);
             _context.Customers.Remove(Customer);
             _context.SaveChanges();
+            TempData["message"] = "Successfully deleted";
             return RedirectToAction("Display", "Customers");
         }
 
@@ -106,6 +107,7 @@ namespace Sahaab_site.Controllers
 
             TryUpdateModel(Customer);
             _context.SaveChanges();
+            TempData["message"] = "Successfully Edited";
             return RedirectToAction("Display", "Customers");
         }
     }

@@ -28,7 +28,7 @@
                     @{int i = 0;}
                     @foreach (var customer in Model)
                     {
-                        {i++;}
+                        { i++; }
                         <tr class="table-info">
                             <td>@i</td>
                             <td>@customer.Name</td>
@@ -47,3 +47,24 @@
     </div>
 </body>
 </html>
+
+
+@section scripts
+{
+    <script>
+            $(document).ready(function () {
+                if ('@TempData["message"]' == "Successfully deleted") {
+                    toastr.success('Customer successfully Deleted..','Delete');
+                }
+                if ('@TempData["message"]' == "Successfully Edited") {
+                    toastr.success('Customer successfully Edited..','SubmitEdit');
+                }
+                 if ('@TempData["message"]' == "Successfully Added") {
+                    toastr.success('Customer successfully Added..', 'AddCustomer');
+                }
+                else { }
+            });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/toastr")
+}
